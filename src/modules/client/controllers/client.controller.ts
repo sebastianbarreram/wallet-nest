@@ -1,15 +1,30 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ClientService } from '../services/client.service';
+import { ClientCreateDto } from '../../../common/storage/dtos/clientCreate.dto';
 
-@Controller('client')
+@Controller('api/client')
 export class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
   @Post('signup')
-  signup(): void {}
+  // signup(
+  //   @Body()
+  //   client: // new ValidationPipe({
+  //   //   transform: true,
+  //   //   whitelist: true,
+  //   //   forbidNonWhitelisted: true,
+  //   // }),
+  //   ClientCreateDto,
+  // ): Promise<ClientEntity> {
+  //   const newClient = new ClientEntity(client);
+  //   return this.clientService.createNewClient(newClient);
+  // }
+  signup() {}
 
   @Get()
-  getClient() {}
+  getClient() {
+    return this.clientService.getClient();
+  }
 
   @Get('search/:search')
   getClientBySearch(@Param('search') search: string) {}
