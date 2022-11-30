@@ -1,5 +1,5 @@
-import { Account } from '../postgres/entities/account.entity';
-import { App } from '../postgres/entities/App.entity';
+import { AccountEntity } from '../postgres/entities/account.entity';
+import { AppEntity } from '../postgres/entities/app.entity';
 
 export class ClientCreateDto {
   id: string;
@@ -20,7 +20,7 @@ export class ClientCreateDto {
 
   deletedAt: Date | null;
 
-  account: Account;
+  account: AccountEntity;
 
-  app: App;
+  app: AppEntity;
 }

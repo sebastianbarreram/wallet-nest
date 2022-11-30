@@ -9,10 +9,10 @@ import { MovementModule } from './modules/movement/movement.module';
 // import { AppEntity } from './common/storage/postgres/entities/app.entity';
 // import { MovementEntity, Movement } from './common/storage/postgres/entities/movement.entity';
 // import { ClientEntity } from './common/storage/postgres/entities/client.entity';
-import { Account } from './common/storage/postgres/entities/account.entity';
-import { App } from './common/storage/postgres/entities/App.entity';
-import { Client } from './common/storage/postgres/entities/client.entity';
-import { Movement } from './common/storage/postgres/entities/Movement.entity';
+import { AccountEntity } from './common/storage/postgres/entities/account.entity';
+import { AppEntity } from './common/storage/postgres/entities/app.entity';
+import { ClientEntity } from './common/storage/postgres/entities/client.entity';
+import { MovementEntity } from './common/storage/postgres/entities/movement.entity';
 
 @Module({
   imports: [
@@ -23,8 +23,8 @@ import { Movement } from './common/storage/postgres/entities/Movement.entity';
       username: 'admin',
       password: 'admin',
       database: 'postgres',
-      // entities: [AccountEntity, AppEntity, ClientEntity, MovementEntity],
-      entities: [Account, App, Client, Movement],
+      entities: [AccountEntity, AppEntity, ClientEntity, MovementEntity],
+      // entities: [Account, App, Client, Movement],
       synchronize: false,
     }),
     AccountModule,

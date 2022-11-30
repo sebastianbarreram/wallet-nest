@@ -1,5 +1,5 @@
-import { Client } from '../postgres/entities/client.entity';
-import { Movement } from '../postgres/entities/Movement.entity';
+import { ClientEntity } from '../postgres/entities/client.entity';
+import { MovementEntity } from '../postgres/entities/movement.entity';
 export class AccountDto {
   id: string;
   idClient: string;
@@ -9,7 +9,7 @@ export class AccountDto {
   createdAt: Date | null;
   updatedAt: Date | null;
   deletedAt: Date | null;
-  client: Client;
-  movementsIncome: Movement[];
-  movementsOutcome: Movement[];
+  client: ClientEntity;
+  movementsIncome: MovementEntity[];
+  movementsOutcome: MovementEntity[];
 }
