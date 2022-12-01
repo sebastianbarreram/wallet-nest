@@ -6,5 +6,7 @@ export class MovementController {
   constructor(private readonly movementService: MovementService) {}
 
   @Post()
-  createMovement() {}
+  createMovement() {
+    return this.movementService.createMovement();
+  }
 }

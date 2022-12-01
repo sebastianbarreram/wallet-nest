@@ -59,7 +59,7 @@ describe('AccountService', () => {
       outcomes: [],
     };
     //Act
-    const result = service.updateCredit(idClient);
+    const result = service.updateCredit(idClient, updateCredit);
 
     //Assert
     expect(result).resolves.toEqual(expected);

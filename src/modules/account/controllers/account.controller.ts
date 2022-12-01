@@ -6,7 +6,7 @@ export class AccountController {
   constructor(private readonly accountService: AccountService) {}
 
   @Get(':id')
-  getAccountbyIdClient(@Param('id') id: string) {
+  getAccountByIdClient(@Param('id') id: string) {
     return this.accountService.getAccountByIdClient(id);
   }
 

@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ClientService } from '../services/client.service';
 import { ClientCreateDto } from '../../../common/storage/dtos/client-create.dto';
-import { ClientEntity } from 'src/common/storage/postgres/entities/client.entity';
+import { ClientEntity } from '../../../common/storage/postgres/entities/client.entity';
 
 @Controller('api/client')
 export class ClientController {
@@ -22,11 +22,13 @@ export class ClientController {
   }
   // signup() {}
 
-  @Get()
-  getClient() {
-    return this.clientService.getClient();
-  }
+  // @Get()
+  // getClient() {
+  //   return this.clientService.getClient();
+  // }
 
   @Get('search/:search')
-  getClientBySearch(@Param('search') search: string) {}
+  getClientBySearch(@Param('search') search: string) {
+    return this.clientService.getClientBySearch(search);
+  }
 }
