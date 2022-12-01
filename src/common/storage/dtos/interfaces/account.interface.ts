@@ -1,7 +1,7 @@
-import { ClientEntity } from '../postgres/entities/client.entity';
-import { MovementEntity } from '../postgres/entities/movement.entity';
-import { AccountInterface } from './interfaces/account.interface';
-export class AccountDto implements AccountInterface {
+import { ClientEntity } from '../../postgres/entities/client.entity';
+import { MovementEntity } from '../../postgres/entities/movement.entity';
+
+export interface AccountInterface {
   id: string;
   idClient: string;
   balance: string;

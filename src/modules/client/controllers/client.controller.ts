@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ClientService } from '../services/client.service';
 import { ClientCreateDto } from '../../../common/storage/dtos/client-create.dto';
 import { ClientEntity } from '../../../common/storage/postgres/entities/client.entity';
@@ -9,15 +16,15 @@ export class ClientController {
 
   @Post('signup')
   signup(
-    @Body()
-    client: // new ValidationPipe({
-    //   transform: true,
-    //   whitelist: true,
-    //   forbidNonWhitelisted: true,
-    // }),
-    ClientCreateDto,
+    @Body(
+      new ValidationPipe({
+        transform: true,
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      }),
+    )
+    newClient: ClientCreateDto,
   ): Promise<ClientEntity> {
-    const newClient = new ClientEntity(client);
     return this.clientService.createNewClient(newClient);
   }
   // signup() {}

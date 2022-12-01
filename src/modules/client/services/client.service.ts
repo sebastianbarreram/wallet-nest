@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { ClientCreateDto } from 'src/common/storage/dtos/client-create.dto';
+import { ClientCreateDto } from '../../../common/storage/dtos/client-create.dto';
 import { ClientEntity } from 'src/common/storage/postgres/entities/client.entity';
 import { DataSource } from 'typeorm';
 
@@ -7,7 +7,8 @@ import { DataSource } from 'typeorm';
 export class ClientService {
   constructor(private dataSource: DataSource) {}
 
-  async createNewClient(client: ClientEntity): Promise<ClientEntity> {
+  async createNewClient(clientInput: ClientCreateDto): Promise<ClientEntity> {
+    const client = new ClientEntity(clientInput);
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -33,5 +34,38 @@ export class ClientService {
   //   return 'mensaje';
   // }
 
-  getClientBySearch(search: string) {}
+  async getClientBySearch(search: string): Promise<ClientEntity> {
+    const validEmail =
+      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    if (validEmail.test(search)) {
+      const client = await this.dataSource.getRepository(ClientEntity).findOne({
+        where: {
+          email: search,
+        },
+        relations: {
+          account: false,
+          app: false,
+        },
+      });
+      if (client === null || client === undefined) {
+        throw new HttpException(
+          `Client with email ${search} does not exist`,
+          HttpStatus.NOT_FOUND,
+        );
+      }
+      return Promise.resolve(client);
+    }
+    const client = await this.dataSource.getRepository(ClientEntity).findOne({
+      where: {
+        phone: search,
+      },
+    });
+    if (client === null || client === undefined) {
+      throw new HttpException(
+        `Client with phone ${search} does not exist`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
+    return Promise.resolve(client);
+  }
 }
