@@ -1,4 +1,4 @@
-import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, Index, OneToOne } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { ClientCreateDto } from '../../dtos/client-create.dto';
 import { AccountEntity } from './account.entity';
@@ -61,8 +61,8 @@ export class ClientEntity {
     this.state = client?.state ?? 1;
     this.createdAt = new Date();
     this.updatedAt = null;
-    this.account = client?.account;
-    this.app = client?.app;
+    this.account = new AccountEntity();
+    this.app = new AppEntity();
   }
 }
 // @Index('client_cli_email_Idx', ['cliEmail'], { unique: true })

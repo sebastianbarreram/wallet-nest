@@ -61,7 +61,7 @@ export class AccountEntity {
   @OneToMany(() => MovementEntity, (movement) => movement.outcome)
   movementsOutcome: MovementEntity[];
 
-  constructor(account: AccountDto) {
+  constructor(account?: AccountDto) {
     if (account?.balance) this.balance = account.balance;
     if (account?.credit) this.credit = account.credit;
     if (account?.state) this.state = account.state;

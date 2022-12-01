@@ -29,11 +29,9 @@ export class ClientService {
     }
   }
 
-  // createNewClient(){}
-
-  getClient() {
-    return 'mensaje';
-  }
+  // getClient() {
+  //   return 'mensaje';
+  // }
 
   getClientBySearch(search: string) {}
 }
