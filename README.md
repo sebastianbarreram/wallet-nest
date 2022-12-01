@@ -71,3 +71,295 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+# API Reference
+
+## Get all customers
+
+This endpoint is used to get a list with all customers.
+
+### Request
+
+```http
+  GET /customer
+```
+
+| **Method Details**       |          |
+| :----------------------- | :------- |
+| HTTP Method              | **GET**  |
+| Response Format          | **json** |
+| Requires Authentication? | **No**   |
+
+### Response
+
+```
+[
+    {
+        "uuid": "1",
+        "nombre": "Sebastian",
+        "apellidos": "Barrera Marín",
+        "telefono": 1111111,
+        "documento": "123456789"
+    },
+    {
+        "uuid": "2",
+        "nombre": "Santiago",
+        "apellidos": "Barrera Marín",
+        "telefono": 2222222,
+        "documento": "789456123"
+    },
+    {
+        "uuid": "3",
+        "nombre": "Humberto",
+        "telefono": 3333333,
+        "documento": "456789123",
+        "apellidos": null
+    }
+]
+```
+
+**Status:** 200 OK
+
+## Get a customer
+
+This endpoint is used to fetch a specific customer by its uuid.
+
+### Request
+
+```http
+  GET /customer/${uuid}
+```
+
+| **Method Details**       |          |
+| :----------------------- | :------- |
+| HTTP Method              | **GET**  |
+| Response Format          | **json** |
+| Requires Authentication? | **No**   |
+
+| **Parameter** | **Type** | **Description**                         |
+| :------------ | :------- | :-------------------------------------- |
+| `uuid`        | `string` | **Required**. Uuid of customer to fetch |
+
+### Response `/customer/2`
+
+```
+{
+    "uuid": "2",
+    "nombre": "Santiago",
+    "apellidos": "Barrera Marín",
+    "telefono": 2222222,
+    "documento": "789456123"
+}
+```
+
+**Status:** 200 OK
+
+## Create a new client
+
+This endpoint is used to store a client.
+
+### Request
+
+```http
+  POST /api/client
+```
+
+| **Method Details**       |          |
+| :----------------------- | :------- |
+| HTTP Method              | **POST** |
+| Response Format          | **json** |
+| Requires Authentication? |  **No**  |
+
+| **Parameter**       | **Type**       | **Description**                                                                                                       |
+| :------------------ | :------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| `Auth Access Token` | `Bearer Token` | **Required**. Used to authenticate the request                                                                        |
+| `uuid`              | `string`       | **Optional**. The uuid of the customer. This unique identifier is auto-generated if it does not exist in request body |
+| `nombre`            | `string`       | **Required**. The name of the customer                                                                                |
+| `apellidos`         | `string`       | **Optional**. The surnames of the customer. The default value is null if it does not exist in request body            |
+| `telefono`          | `number`       | **Required**. The phone number of the customer                                                                        |
+| `documento`         | `string`       | **Required**. The Identity document of the customer                                                                   |
+
+### Request example
+
+BODY `raw`:
+
+```
+{
+    "nombre": "Diana",
+    "telefono": 4444444,
+    "documento": "123798456"
+}
+```
+
+AUTHORIZATION `Bearer Token`:
+
+```
+99e4c497d8b4c049ce41e71ff04055adc01714bccdf2f901e4c1d16ffabcef571398fa2b416ddc1037a98c4040c2f277c1bbb2dbc647ed65a2acaf657ac229ec
+```
+
+### Response
+
+```
+{
+    "uuid": "14e07020-d851-4d56-8d77-511b1412b718",
+    "nombre": "Diana",
+    "telefono": 4444444,
+    "documento": "123798456",
+    "apellidos": null
+}
+```
+
+**Status:** 201 Created
+
+## Update a customer
+
+This endpoint is used to update a previously created custumer.
+
+### Request
+
+```http
+  PUT /customer/${uuid}
+```
+
+| **Method Details**       |          |
+| :----------------------- | :------- |
+| HTTP Method              | **PUT**  |
+| Response Format          | **json** |
+| Requires Authentication? | **Yes**  |
+
+| **Parameter**       | **Type**       | **Description**                                                                                            |
+| :------------------ | :------------- | :--------------------------------------------------------------------------------------------------------- |
+| `Auth Access Token` | `Bearer Token` | **Required**. Used to authenticate the request                                                             |
+| `uuid`              | `string`       | **Required**. The uuid of the customer you want to update                                                  |
+| `nombre`            | `string`       | **Required**. The name of the customer                                                                     |
+| `apellidos`         | `string`       | **Optional**. The surnames of the customer. The default value is null if it does not exist in request body |
+| `telefono`          | `number`       | **Required**. The phone number of the customer                                                             |
+| `documento`         | `string`       | **Required**. The Identity document of the customer                                                        |
+
+### Request example `/customer/2`
+
+URL: localhost:3000/customer/2
+
+BODY `raw`:
+
+```
+{
+    "nombre": "Diana",
+    "apellidos": "Marín",
+    "telefono": 111111111111111111111,
+    "documento": "123798456"
+}
+```
+
+AUTHORIZATION `Bearer Token`:
+
+```
+99e4c497d8b4c049ce41e71ff04055adc01714bccdf2f901e4c1d16ffabcef571398fa2b416ddc1037a98c4040c2f277c1bbb2dbc647ed65a2acaf657ac229ec
+```
+
+### Response
+
+```
+{
+    "uuid": "2",
+    "nombre": "Diana",
+    "apellidos": "Marín",
+    "telefono": 111111111111111110000,
+    "documento": "123798456"
+}
+```
+
+**Status:** 200 OK
+
+## Update a costumer partially
+
+This endpoint is used to update a previously created custumer partially.
+
+### Request
+
+```http
+  PATCH /customer/${uuid}
+```
+
+| **Method Details**       |           |
+| :----------------------- | :-------- |
+| HTTP Method              | **PATCH** |
+| Response Format          | **json**  |
+| Requires Authentication? | **Yes**   |
+
+| **Parameter**       | **Type**       | **Description**                                                                                            |
+| :------------------ | :------------- | :--------------------------------------------------------------------------------------------------------- |
+| `Auth Access Token` | `Bearer Token` | **Required**. Used to authenticate the request                                                             |
+| `uuid`              | `string`       | **Required**. The uuid of the customer you want to update                                                  |
+| `nombre`            | `string`       | **Optional**. The name of the customer                                                                     |
+| `apellidos`         | `string`       | **Optional**. The surnames of the customer. The default value is null if it does not exist in request body |
+| `telefono`          | `number`       | **Optional**. The phone number of the customer                                                             |
+| `documento`         | `string`       | **Optional**. The identity document of the customer                                                        |
+
+### Request example `/customer/2`
+
+BODY `raw`:
+
+```
+{
+    "documento": "0000000000000000000000000"
+}
+```
+
+AUTHORIZATION `Bearer Token`:
+
+```
+99e4c497d8b4c049ce41e71ff04055adc01714bccdf2f901e4c1d16ffabcef571398fa2b416ddc1037a98c4040c2f277c1bbb2dbc647ed65a2acaf657ac229ec
+```
+
+### Response
+
+```
+{
+    "uuid": "2",
+    "nombre": "Santiago",
+    "apellidos": "Barrera Marín",
+    "telefono": 2222222,
+    "documento": "0000000000000000000000000"
+}
+```
+
+**Status:** 200 OK
+
+## Delete a costumer
+
+This endpoint is used to delete a existing custumer.
+
+### Request
+
+```http
+  DELETE /customer/${uuid}
+```
+
+| **Method Details**       |             |
+| :----------------------- | :---------- |
+| HTTP Method              | **DELETE**  |
+| Response Format          | **boolean** |
+| Requires Authentication? | **Yes**     |
+
+| **Parameter**       | **Type**       | **Description**                                           |
+| :------------------ | :------------- | :-------------------------------------------------------- |
+| `Auth Access Token` | `Bearer Token` | **Required**. Used to authenticate the request            |
+| `uuid`              | `string`       | **Required**. The uuid of the customer you want to delete |
+
+### Request example `/customer/2`
+
+AUTHORIZATION `Bearer Token`:
+
+```
+99e4c497d8b4c049ce41e71ff04055adc01714bccdf2f901e4c1d16ffabcef571398fa2b416ddc1037a98c4040c2f277c1bbb2dbc647ed65a2acaf657ac229ec
+```
+
+### Response
+
+```
+true
+```
+
+**Status:** 200 OK
+
