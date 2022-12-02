@@ -24,7 +24,7 @@ export class ClientService {
 
       await queryRunner.rollbackTransaction();
       throw new HttpException(
-        'Tenemos problemas para insertar una factura',
+        'Tenemos problemas para insertar un cliente',
         HttpStatus.CONFLICT,
       );
     }

@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put } from '@nestjs/common';
 import { AccountService } from '../services/account.service';
+import { AccountUpdateDto } from '../../../common/storage/dtos/account-update.dto';
 
 @Controller('api/account')
 export class AccountController {
@@ -11,7 +12,10 @@ export class AccountController {
   }
 
   @Put(':id')
-  updateCreditByIdClient(@Param('id') id: string) {
-    this.accountService.updateCredit(id);
+  updateCreditByIdClient(
+    @Param('id') id: string,
+    @Body() updateAccount: AccountUpdateDto,
+  ) {
+    return this.accountService.updateCredit(id, updateAccount);
   }
 }
