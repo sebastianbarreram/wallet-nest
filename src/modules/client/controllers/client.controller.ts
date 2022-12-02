@@ -35,7 +35,7 @@ export class ClientController {
   // }
 
   @Get('search/:search')
-  getClientBySearch(@Param('search') search: string) {
+  getClientBySearch(@Param('search') search: string): Promise<ClientEntity> {
     return this.clientService.getClientBySearch(search);
   }
 }

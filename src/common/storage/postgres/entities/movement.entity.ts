@@ -1,6 +1,7 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 import { AccountEntity } from './account.entity';
 import { v4 as uuid } from 'uuid';
+import { MovementCreateDto } from '../../dtos/movement-create.dto';
 
 @Index(
   'movement_acc_id_income_acc_id_outcome_Idx',
@@ -47,6 +48,14 @@ export class MovementEntity {
   })
   @JoinColumn([{ name: 'acc_id_outcome', referencedColumnName: 'id' }])
   outcome: AccountEntity;
+
+  constructor(movement?: MovementCreateDto) {
+    this.idIncome = movement?.idIncome;
+    this.idOutcome = movement?.idOutcome;
+    this.reason = movement?.reason;
+    this.amount = movement?.amount;
+    this.fees = movement?.fees;
+  }
 }
 
 // @Index(

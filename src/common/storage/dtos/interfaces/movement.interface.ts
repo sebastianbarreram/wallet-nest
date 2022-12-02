@@ -4,6 +4,6 @@ export interface MovementInterface {
   idOutcome: string;
   reason: string;
   amount: string;
-  fees: string;
+  fees: number;
   date: Date;
 }

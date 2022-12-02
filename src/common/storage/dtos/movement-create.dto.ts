@@ -1,13 +1,25 @@
-import { AccountEntity } from '../postgres/entities/account.entity';
-import { AppEntity } from '../postgres/entities/app.entity';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { MovementInterface } from './interfaces/movement.interface';
 
 export class MovementCreateDto implements MovementInterface {
+  @IsOptional()
   id: string;
+
+  @IsNotEmpty()
   idIncome: string;
+
+  @IsNotEmpty()
   idOutcome: string;
+
+  @IsNotEmpty()
   reason: string;
+
+  @IsNotEmpty()
   amount: string;
-  fees: string;
+
+  @IsNotEmpty()
+  fees: number;
+
+  @IsOptional()
   date: Date;
 }
