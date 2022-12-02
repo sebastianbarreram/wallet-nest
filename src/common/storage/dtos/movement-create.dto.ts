@@ -15,7 +15,7 @@ export class MovementCreateDto implements MovementInterface {
   reason: string;
 
   @IsNotEmpty()
-  amount: string;
+  amount: number;
 
   @IsNotEmpty()
   fees: number;

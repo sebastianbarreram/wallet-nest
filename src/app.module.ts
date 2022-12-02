@@ -14,7 +14,7 @@ import { MovementEntity } from './common/storage/postgres/entities/movement.enti
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: '127.0.0.1',
+      host: 'localhost',
       port: 5432,
       username: 'admin',
       password: 'admin',

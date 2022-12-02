@@ -24,7 +24,7 @@ export class MovementEntity {
   reason: string;
 
   @Column('bigint', { name: 'mov_amount' })
-  amount: string;
+  amount: number;
 
   @Column('integer', { name: 'mov_fees', default: () => '1' })
   fees: number;

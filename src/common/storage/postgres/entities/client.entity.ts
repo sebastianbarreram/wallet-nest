@@ -50,7 +50,7 @@ export class ClientEntity {
   })
   account: AccountEntity;
 
-  @OneToOne(() => AppEntity, (app) => app.client, { cascade: ['insert'] })
+  @OneToOne(() => AppEntity, (app) => app.client, { cascade: ['update'] })
   app: AppEntity;
 
   constructor(client?: ClientCreateDto) {

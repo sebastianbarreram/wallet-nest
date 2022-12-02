@@ -3,7 +3,7 @@ export interface MovementInterface {
   idIncome: string;
   idOutcome: string;
   reason: string;
-  amount: string;
+  amount: number;
   fees: number;
   date: Date;
 }

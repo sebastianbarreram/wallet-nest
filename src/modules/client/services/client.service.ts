@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ClientCreateDto } from '../../../common/storage/dtos/client-create.dto';
 import { ClientEntity } from 'src/common/storage/postgres/entities/client.entity';
 import { DataSource } from 'typeorm';
+import { ClientGetDto } from '../../../common/storage/dtos/client-get.dto';
 
 @Injectable()
 export class ClientService {
@@ -34,7 +35,7 @@ export class ClientService {
   //   return 'mensaje';
   // }
 
-  async getClientBySearch(search: string): Promise<ClientEntity> {
+  async getClientBySearch(search: string): Promise<ClientGetDto> {
     const validEmail =
       /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     if (validEmail.test(search)) {
@@ -53,7 +54,8 @@ export class ClientService {
           HttpStatus.NOT_FOUND,
         );
       }
-      return Promise.resolve(client);
+      const clientDto = new ClientGetDto(client);
+      return Promise.resolve(clientDto);
     }
     const client = await this.dataSource.getRepository(ClientEntity).findOne({
       where: {
@@ -66,6 +68,7 @@ export class ClientService {
         HttpStatus.NOT_FOUND,
       );
     }
-    return Promise.resolve(client);
+    const clientDto = new ClientGetDto(client);
+    return Promise.resolve(clientDto);
   }
 }

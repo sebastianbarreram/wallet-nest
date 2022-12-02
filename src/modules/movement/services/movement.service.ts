@@ -12,26 +12,19 @@ export class MovementService {
     private readonly accountService: AccountService,
   ) {}
 
-  async createMovement(movementInput: MovementCreateDto) {
+  createMovement(movementInput: MovementCreateDto): Promise<MovementEntity>{
     const movement = new MovementEntity(movementInput);
     console.log(movement);
 
-    // return this.dataSource.getRepository(MovementEntity).save(movement);
+    return this.dataSource.getRepository(MovementEntity).save(movement);
 
-    const accountIncome = await this.accountService.getAccountByIdClient(
-      movementInput.idIncome,
-    );
-    const accountOutcome = await this.accountService.getAccountByIdClient(
-      movementInput.idOutcome,
-    );
-    console.log(accountIncome);
-    console.log(accountOutcome);
-    console.log(accountIncome.id == accountOutcome.id);
+    // this.dataSource
+    //   .getRepository(MovementEntity)
+    //   .save(movement)
+    //   .then((data) => {
+    //     console.log('data', data);
+    //   })
+    //   .catch((err) => console.log(err));
 
-    this.dataSource.getRepository(MovementEntity).save(movement);
-    accountIncome.movementsIncome.push(movement);
-    console.log(accountIncome);
-
-    return this.dataSource.getRepository(AccountEntity).save(accountIncome);
   }
 }
