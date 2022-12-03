@@ -1,7 +1,7 @@
 import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
 import { ClientEntity } from './client.entity';
 import { v4 as uuid } from 'uuid';
-import { AppDto } from '../../dtos/app.dto';
+import { AppInterface } from '../../dtos/interfaces/app.interface';
 
 @Index('pkapp', ['id'], { unique: true })
 @Index('app_cli_id_Idx', ['idClient'], { unique: true })
@@ -38,7 +38,7 @@ export class AppEntity {
   })
   @JoinColumn([{ name: 'cli_id', referencedColumnName: 'id' }])
   client: ClientEntity;
-  constructor(app?: AppDto) {
+  constructor(app?: AppInterface) {
     if (app?.color) this.color = app?.color;
   }
 }

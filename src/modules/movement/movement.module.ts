@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MovementController } from './controllers/movement.controller';
 import { MovementService } from './services/movement.service';
+import { AccountService } from '../account/services/account.service';
 
 @Module({
   controllers: [MovementController],
-  providers: [MovementService],
+  providers: [MovementService, AccountService],
 })
 export class MovementModule {}

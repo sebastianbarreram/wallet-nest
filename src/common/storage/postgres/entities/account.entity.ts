@@ -55,21 +55,28 @@ export class AccountEntity {
   @JoinColumn([{ name: 'cli_id', referencedColumnName: 'id' }])
   client: ClientEntity;
 
-  @OneToMany(() => MovementEntity, (movement) => movement.income)
+  @OneToMany(() => MovementEntity, (movement) => movement.income, {
+    cascade: ['update'],
+  })
   movementsIncome: MovementEntity[];
 
-  @OneToMany(() => MovementEntity, (movement) => movement.outcome)
+  @OneToMany(() => MovementEntity, (movement) => movement.outcome, {
+    cascade: ['update'],
+  })
   movementsOutcome: MovementEntity[];
 
   constructor(account?: AccountDto) {
+    if (account?.id) this.id = account.id;
     if (account?.balance) this.balance = account.balance;
     if (account?.credit) this.credit = account.credit;
     if (account?.state) this.state = account.state;
     if (account?.createdAt) this.createdAt = account.createdAt;
     if (account?.updatedAt) this.updatedAt = account.updatedAt;
     if (account?.deletedAt) this.deletedAt = account.deletedAt;
-    // this.movementsIncome = [];
-    // this.movementsOutcome = [];
+    //   if (account?.movementsIncome)
+    //     this.movementsIncome = account.movementsIncome;
+    //   if (account?.movementsOutcome)
+    //     this.movementsOutcome = account.movementsOutcome;
   }
 }
 // @Index('pkaccount', ['accId'], { unique: true })

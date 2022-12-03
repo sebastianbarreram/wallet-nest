@@ -54,10 +54,10 @@ export class ClientEntity {
   app: AppEntity;
 
   constructor(client?: ClientCreateDto) {
-    this.fullName = client?.fullName ?? '';
-    this.email = client?.email ?? '';
-    this.phone = client?.phone ?? '';
-    this.photo = client?.photo ?? '';
+    this.fullName = client?.fullName;
+    this.email = client?.email;
+    this.phone = client?.phone;
+    this.photo = client?.photo;
     this.state = client?.state ?? 1;
     this.createdAt = new Date();
     this.updatedAt = null;
