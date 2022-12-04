@@ -2,13 +2,6 @@ import { AccountEntity } from '../postgres/entities/account.entity';
 import { AppEntity } from '../postgres/entities/app.entity';
 import { ClientEntity } from '../postgres/entities/client.entity';
 import { ClientInterface } from './interfaces/client.interface';
-import {
-  IsDate,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
 
 export class ClientGetDto implements ClientInterface {
   id: string;

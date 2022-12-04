@@ -31,10 +31,6 @@ export class ClientService {
     }
   }
 
-  // getClient() {
-  //   return 'mensaje';
-  // }
-
   async getClientBySearch(search: string): Promise<ClientGetDto> {
     const validEmail =
       /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
@@ -44,8 +40,8 @@ export class ClientService {
           email: search,
         },
         relations: {
-          account: false,
-          app: false,
+          account: true,
+          app: true,
         },
       });
       if (client === null || client === undefined) {
@@ -54,12 +50,16 @@ export class ClientService {
           HttpStatus.NOT_FOUND,
         );
       }
-      const clientDto = new ClientGetDto(client);
-      return Promise.resolve(clientDto);
+      // const clientDto = new ClientGetDto(client);
+      return Promise.resolve(client);
     }
     const client = await this.dataSource.getRepository(ClientEntity).findOne({
       where: {
         phone: search,
+      },
+      relations: {
+        account: true,
+        app: true,
       },
     });
     if (client === null || client === undefined) {
@@ -68,7 +68,7 @@ export class ClientService {
         HttpStatus.NOT_FOUND,
       );
     }
-    const clientDto = new ClientGetDto(client);
-    return Promise.resolve(clientDto);
+    // const clientDto = new ClientGetDto(client);
+    return Promise.resolve(client);
   }
 }
