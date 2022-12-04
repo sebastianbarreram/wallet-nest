@@ -42,15 +42,21 @@ export class ClientCreateDto implements ClientInterface {
   @IsNumber()
   state: number;
 
-  @IsDate()
+  @IsDate({
+    message: 'The `createdAt` argument must be of type Date',
+  })
   @IsOptional()
   createdAt: Date;
 
-  @IsDate()
+  @IsDate({
+    message: 'The `updatedAt` argument must be of type Date',
+  })
   @IsOptional()
   updatedAt: Date | null;
 
-  @IsDate()
+  @IsDate({
+    message: 'The `deletedAt` argument must be of type Date',
+  })
   @IsOptional()
   deletedAt: Date | null;
 

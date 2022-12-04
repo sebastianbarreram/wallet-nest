@@ -17,7 +17,7 @@ export class AccountService {
     return Promise.resolve(account);
   }
 
-  async updateCredit(id: string, updateAccount: AccountUpdateDto) {
+  async updateAccount(id: string, updateAccount: AccountUpdateDto) {
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();

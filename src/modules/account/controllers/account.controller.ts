@@ -16,6 +16,6 @@ export class AccountController {
     @Param('id') id: string,
     @Body() updateAccount: AccountUpdateDto,
   ) {
-    return this.accountService.updateCredit(id, updateAccount);
+    return this.accountService.updateAccount(id, updateAccount);
   }
 }
