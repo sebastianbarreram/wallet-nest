@@ -30,11 +30,11 @@ export class MovementCreateDto implements MovementInterface {
   reason: string;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsNumber({}, { message: 'The `amount` argument must be of type number' })
   amount: number;
 
   @IsNotEmpty()
-  @IsNumber()
+  @IsNumber({}, { message: 'The `fees` argument must be of type number' })
   fees: number;
 
   @IsOptional()

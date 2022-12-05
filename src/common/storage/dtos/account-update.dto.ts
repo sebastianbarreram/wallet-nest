@@ -22,7 +22,7 @@ export class AccountUpdateDto implements AccountInterface {
   credit: string;
 
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { message: 'The `state` argument must be of type number' })
   state: number;
 
   @IsOptional()

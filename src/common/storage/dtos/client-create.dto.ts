@@ -39,7 +39,7 @@ export class ClientCreateDto implements ClientInterface {
   photo: string;
 
   @IsOptional()
-  @IsNumber()
+  @IsNumber({}, { message: 'The `state` argument must be of type number' })
   state: number;
 
   @IsDate({
