@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put, UseGuards } from '@nestjs/common';
 import { AccountService } from '../services/account.service';
 import { AccountUpdateDto } from '../../../common/storage/dtos/account-update.dto';
+import { AuthGuard } from '../../../common/guards/auth-guard';
 
 @Controller('api/account')
 export class AccountController {
@@ -12,6 +13,7 @@ export class AccountController {
   }
 
   @Put(':id')
+  @UseGuards(AuthGuard)
   updateCreditByIdClient(
     @Param('id') id: string,
     @Body() updateAccount: AccountUpdateDto,
