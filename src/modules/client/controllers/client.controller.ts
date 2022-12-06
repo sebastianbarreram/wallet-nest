@@ -28,12 +28,6 @@ export class ClientController {
   ): Promise<ClientEntity> {
     return this.clientService.createNewClient(newClient);
   }
-  // signup() {}
-
-  // @Get()
-  // getClient() {
-  //   return this.clientService.getClient();
-  // }
 
   @Get('search/:search')
   getClientBySearch(@Param('search') search: string): Promise<ClientGetDto> {
