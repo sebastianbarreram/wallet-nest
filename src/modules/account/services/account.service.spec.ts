@@ -139,10 +139,10 @@ describe('AccountService', () => {
     expect(result).resolves.toEqual(expected);
   });
 
-  it('should update credit from a specific account by its idClient', () => {
+  it('should update a specific account by its idClient', () => {
     //Arrange
     const idClient = 'f03c4464-2aea-4330-a9fb-eda42fb5c724';
-    const updateCredit: AccountUpdateDto = {
+    const updateAccount: AccountUpdateDto = {
       balance: '15000',
       credit: '20500',
       id: '',
@@ -189,7 +189,7 @@ describe('AccountService', () => {
       ],
     };
     //Act
-    const result = service.updateAccount(idClient, updateCredit);
+    const result = service.updateAccount(idClient, updateAccount);
 
     //Assert
     expect(result).resolves.toEqual(expected);

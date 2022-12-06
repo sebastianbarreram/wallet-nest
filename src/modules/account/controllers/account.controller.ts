@@ -14,7 +14,7 @@ export class AccountController {
 
   @Put(':id')
   @UseGuards(AuthGuard)
-  updateCreditByIdClient(
+  updateAccountByIdClient(
     @Param('id') id: string,
     @Body() updateAccount: AccountUpdateDto,
   ) {

@@ -24,8 +24,6 @@ export class ClientService {
       return Promise.resolve(newClient);
     } catch (err) {
       // since we have errors lets rollback the changes we made
-      console.log(err);
-
       await queryRunner.rollbackTransaction();
       throw new HttpException(
         'Tenemos problemas para insertar un cliente',
@@ -53,7 +51,6 @@ export class ClientService {
           HttpStatus.NOT_FOUND,
         );
       }
-      // const clientDto = new ClientGetDto(client);
       return Promise.resolve(client);
     }
     const client = await this.dataSource.getRepository(ClientEntity).findOne({
@@ -71,7 +68,6 @@ export class ClientService {
         HttpStatus.NOT_FOUND,
       );
     }
-    // const clientDto = new ClientGetDto(client);
     return Promise.resolve(client);
   }
 }

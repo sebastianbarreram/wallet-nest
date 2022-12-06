@@ -11,5 +11,20 @@ export class AppService {
     private readonly appRepository: Repository<AppEntity>,
   ) {}
 
-  updateApp(id: string, app: AppUpdateDto) {}
+  async updateApp(id: string, updateApp: AppUpdateDto) {
+    const app = await this.getAppByIdClient(id);
+    app.color = updateApp.color;
+    app.updatedAt = new Date(Date.now());
+    const newApp = await this.appRepository.save(app);
+    return Promise.resolve(newApp);
+  }
+
+  async getAppByIdClient(id: string): Promise<AppEntity> {
+    const account = await this.appRepository.findOne({
+      where: {
+        idClient: id,
+      },
+    });
+    return Promise.resolve(account);
+  }
 }

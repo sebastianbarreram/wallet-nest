@@ -25,6 +25,7 @@ export class AccountService {
     const account = await this.getAccountByIdClient(id);
     account.balance = updateAccount.balance;
     account.credit = updateAccount.credit;
+    account.updatedAt = new Date(Date.now());
     const newAccount = await this.accountRepository.save(account);
     return Promise.resolve(newAccount);
   }
