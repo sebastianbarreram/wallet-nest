@@ -1,5 +1,5 @@
 import { Controller, Param, Put } from '@nestjs/common';
-import { AppUpdateDto } from '../../../common/storage/dtos/app-update';
+import { AppUpdateDto } from '../../../common/storage/dtos/app-update.dto';
 import { AppService } from '../services/app.service';
 
 @Controller('app')

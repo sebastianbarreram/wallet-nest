@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './modules/app/controllers/app.controller';
-import { AppService } from './modules/app/services/app.service';
+import { MainService } from './modules/main/services/main.service';
+import { MainController } from './modules/main/controllers/main.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountModule } from './modules/account/account.module';
+import { AppModule } from './modules/app/app.module';
 import { ClientModule } from './modules/client/client.module';
 import { MovementModule } from './modules/movement/movement.module';
 import { AccountEntity } from './common/storage/postgres/entities/account.entity';
@@ -32,7 +33,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     ClientModule,
     MovementModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [MainController],
+  providers: [MainService],
 })
-export class AppModule {}
+export class MainModule {}

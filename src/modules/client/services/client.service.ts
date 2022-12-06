@@ -1,20 +1,23 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ClientCreateDto } from '../../../common/storage/dtos/client-create.dto';
-import { ClientEntity } from 'src/common/storage/postgres/entities/client.entity';
-import { DataSource } from 'typeorm';
+import { ClientEntity } from '../../../common/storage/postgres/entities/client.entity';
+import { DataSource, Repository } from 'typeorm';
 import { ClientGetDto } from '../../../common/storage/dtos/client-get.dto';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class ClientService {
-  constructor(private dataSource: DataSource) {}
+  constructor(
+    private readonly dataSource: DataSource,
+    @InjectRepository(ClientEntity)
+    private readonly clientRepository: Repository<ClientEntity>,
+  ) {}
 
   async createNewClient(clientInput: ClientCreateDto): Promise<ClientEntity> {
     const client = new ClientEntity(clientInput);
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
-    console.log(client);
-
     try {
       const newClient = await queryRunner.manager.save(client);
       await queryRunner.commitTransaction();
@@ -35,7 +38,7 @@ export class ClientService {
     const validEmail =
       /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     if (validEmail.test(search)) {
-      const client = await this.dataSource.getRepository(ClientEntity).findOne({
+      const client = await this.clientRepository.findOne({
         where: {
           email: search,
         },
