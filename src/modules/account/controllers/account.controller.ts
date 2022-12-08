@@ -34,4 +34,9 @@ export class AccountController {
   getMovementsByAccountId(@Param('id') id: string) {
     return this.accountService.getMovementsByAccountId(id);
   }
+
+  @Get('full/:id')
+  getFullAccount(@Param('id') id: string) {
+    return this.accountService.getFullAccount(id);
+  }
 }

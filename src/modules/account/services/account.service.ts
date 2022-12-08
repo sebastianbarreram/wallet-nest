@@ -5,6 +5,7 @@ import { AccountUpdateDto } from '../../../common/storage/dtos/account-update.dt
 import { InjectRepository } from '@nestjs/typeorm';
 import { AccountGetByIDInterface } from '../../../common/storage/dtos/interfaces/account-get-by-id.interface';
 import { MovementInterface } from '../../../common/storage/dtos/interfaces/movement.interface';
+import { AccountFullDto } from '../../../common/storage/dtos/account-get-full.dto';
 
 @Injectable()
 export class AccountService {
@@ -88,5 +89,16 @@ export class AccountService {
       ...outcomes.filter((item) => !ids.has(item.id)),
     ];
     return transactions;
+  }
+  async getFullAccount(id: string): Promise<AccountFullDto> {
+    const account = await this.getAccountByIdClient(id);
+    const movements = await this.getMovementsByAccountId(account.id);
+    const images = await this.getMovementPhotosByAccountId(account.id);
+    const accountFull: AccountFullDto = {
+      account: account,
+      movements: movements,
+      images: images,
+    };
+    return accountFull;
   }
 }
