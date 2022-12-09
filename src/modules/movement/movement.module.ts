@@ -5,10 +5,14 @@ import { AccountService } from '../account/services/account.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountEntity } from '../../common/storage/postgres/entities/account.entity';
 import { MovementEntity } from '../../common/storage/postgres/entities/movement.entity';
+import { AccountModule } from '../account/account.module';
 
 @Module({
   controllers: [MovementController],
   providers: [MovementService, AccountService],
-  imports: [TypeOrmModule.forFeature([AccountEntity, MovementEntity])],
+  imports: [
+    TypeOrmModule.forFeature([AccountEntity, MovementEntity]),
+    AccountModule,
+  ],
 })
 export class MovementModule {}
