@@ -51,4 +51,8 @@ export class AccountUpdateDto implements AccountInterface {
 
   @IsOptional()
   movementsOutcome: MovementEntity[];
+  constructor(data?: AccountInterface) {
+    this.balance = data?.balance;
+    this.credit = data?.balance;
+  }
 }

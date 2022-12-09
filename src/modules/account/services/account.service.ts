@@ -36,7 +36,9 @@ export class AccountService {
     return Promise.resolve(newAccount);
   }
 
-  async getAccountById(id: string): Promise<AccountGetByIDInterface> {
+  async getClientPhotoByAccountId(
+    id: string,
+  ): Promise<AccountGetByIDInterface> {
     const account = await this.accountRepository.findOne({
       where: {
         id: id,
@@ -65,7 +67,7 @@ export class AccountService {
     }
     const images: AccountGetByIDInterface[] = [];
     for (const id of idAccountIncome) {
-      const accountPhoto = await this.getAccountById(id);
+      const accountPhoto = await this.getClientPhotoByAccountId(id);
       images.push(accountPhoto);
     }
     return images;
@@ -100,5 +102,14 @@ export class AccountService {
       images: images,
     };
     return accountFull;
+  }
+
+  async getAccountByIdAccount(id: string): Promise<AccountEntity> {
+    const account = await this.accountRepository.findOne({
+      where: {
+        id: id,
+      },
+    });
+    return Promise.resolve(account);
   }
 }

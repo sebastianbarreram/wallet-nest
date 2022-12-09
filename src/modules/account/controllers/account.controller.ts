@@ -14,6 +14,11 @@ export class AccountController {
     return this.accountService.getAccountByIdClient(id);
   }
 
+  @Get('accountId/:id')
+  getAccountByIdAccount(@Param('id') id: string): Promise<AccountEntity> {
+    return this.accountService.getAccountByIdAccount(id);
+  }
+
   @Put(':id')
   @UseGuards(AuthGuard)
   updateAccountByIdClient(
