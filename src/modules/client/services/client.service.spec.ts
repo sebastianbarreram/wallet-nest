@@ -208,4 +208,44 @@ describe('ClientService', () => {
     //Assert
     expect(result).resolves.toEqual(expected);
   });
+  it('should fetch a specific client by its phone number', () => {
+    //Arrange
+    const phone = '3';
+
+    const expected = {
+      id: 'df1f52c4-39a4-4f1e-b0d8-28b4ff5ec092',
+      fullName: 'Sebastian Barrera Marin',
+      email: 'sebastian.barrera@sofka.com.co',
+      phone: '3',
+      photo:
+        'https://lh3.googleusercontent.com/a/ALm5wu2aVo2Geh0uDQ0qO8hVpheL0w9vRbpATJl8YKj6=s96-c',
+      state: 1,
+      createdAt: '2022-12-04T18:57:12.752Z',
+      updatedAt: null,
+      account: {
+        id: '975da24c-fbb9-464d-920b-3231bf4378be',
+        idClient: 'df1f52c4-39a4-4f1e-b0d8-28b4ff5ec092',
+        balance: '0',
+        credit: '50000000',
+        state: 1,
+        createdAt: '2022-12-04T23:57:13.561Z',
+        updatedAt: null,
+        deletedAt: null,
+      },
+      app: {
+        id: 'a7358691-59ca-4431-aab6-52c3eeb4a49d',
+        idClient: 'df1f52c4-39a4-4f1e-b0d8-28b4ff5ec092',
+        color: 'default',
+        createdAt: '2022-12-04T23:57:13.561Z',
+        updatedAt: null,
+      },
+      deletedAt: null,
+    };
+
+    //Act
+    const result = service.getClientBySearch(phone);
+
+    //Assert
+    expect(result).resolves.toEqual(expected);
+  });
 });

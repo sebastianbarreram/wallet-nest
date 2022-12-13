@@ -25,9 +25,6 @@ export class MovementService {
     const accountOutcome = await this.accountService.getAccountByIdAccount(
       movement.idOutcome,
     );
-    console.log('accountIncome :>> ', accountIncome);
-    console.log('accountOutcome :>> ', accountOutcome);
-
     if (movement.idIncome !== movement.idOutcome) {
       const newBalaceAccountIncome =
         Number(accountIncome.balance) + movement.amount;

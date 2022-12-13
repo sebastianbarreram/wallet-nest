@@ -53,7 +53,7 @@ export class ClientService {
       }
       return Promise.resolve(client);
     }
-    const client = await this.dataSource.getRepository(ClientEntity).findOne({
+    const client = await this.clientRepository.findOne({
       where: {
         phone: search,
       },
