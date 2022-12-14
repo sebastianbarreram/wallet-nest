@@ -6,6 +6,7 @@ import { AccountEntity } from '../../../common/storage/postgres/entities/account
 import { AccountGetByIDInterface } from '../../../common/storage/dtos/interfaces/account-get-by-id.interface';
 
 @Controller('api/account')
+@UseGuards(AuthGuard)
 export class AccountController {
   constructor(private readonly accountService: AccountService) {}
 
@@ -20,7 +21,6 @@ export class AccountController {
   }
 
   @Put(':id')
-  @UseGuards(AuthGuard)
   updateAccountByIdClient(
     @Param('id') id: string,
     @Body() updateAccount: AccountUpdateDto,

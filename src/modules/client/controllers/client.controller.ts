@@ -4,12 +4,14 @@ import {
   Get,
   Param,
   Post,
+  UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
 import { ClientService } from '../services/client.service';
 import { ClientCreateDto } from '../../../common/storage/dtos/client-create.dto';
 import { ClientEntity } from '../../../common/storage/postgres/entities/client.entity';
 import { ClientGetDto } from '../../../common/storage/dtos/client-get.dto';
+import { AuthGuard } from '../../../common/guards/auth-guard';
 
 @Controller('api/client')
 export class ClientController {
@@ -30,6 +32,7 @@ export class ClientController {
   }
 
   @Get('search/:search')
+  @UseGuards(AuthGuard)
   getClientBySearch(@Param('search') search: string): Promise<ClientGetDto> {
     return this.clientService.getClientBySearch(search);
   }

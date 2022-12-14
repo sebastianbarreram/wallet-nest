@@ -18,7 +18,7 @@ export class AppEntity {
     length: 30,
     default: () => "'default'",
   })
-  color: string;
+  color = '#1554F7';
 
   @Column('timestamp without time zone', {
     name: 'app_created_at',
