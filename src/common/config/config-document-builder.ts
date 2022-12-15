@@ -2,7 +2,9 @@ import { DocumentBuilder } from '@nestjs/swagger';
 
 export const configDocumentBuilder = new DocumentBuilder()
   .setTitle('Wallet Nest')
-  .setDescription('The Wallet Nest API description')
+  .setDescription(
+    'The API is built to allow you to create a functional wallet application. You can create, fetch and update client, account or app information if it is requered, and create transactions (movements) with specific amount of money. The API uses standard verbs and returns HTTP response codes and JSON-encoded responses.',
+  )
   .setVersion('1.0')
   .addTag(
     'App',
