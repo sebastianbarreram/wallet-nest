@@ -92,6 +92,7 @@ export class AccountService {
     ];
     return transactions;
   }
+
   async getFullAccount(id: string): Promise<AccountFullDto> {
     const account = await this.getAccountByIdClient(id);
     const movements = await this.getMovementsByAccountId(account.id);
