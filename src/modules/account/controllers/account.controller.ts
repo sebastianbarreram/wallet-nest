@@ -4,18 +4,20 @@ import { AccountUpdateDto } from '../../../common/storage/dtos/account-update.dt
 import { AuthGuard } from '../../../common/guards/auth-guard';
 import { AccountEntity } from '../../../common/storage/postgres/entities/account.entity';
 import { AccountGetByIDInterface } from '../../../common/storage/dtos/interfaces/account-get-by-id.interface';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller('api/account')
 @UseGuards(AuthGuard)
+@ApiTags('Account')
 export class AccountController {
   constructor(private readonly accountService: AccountService) {}
 
-  @Get(':id')
+  // @Get(':id')
   getAccountByIdClient(@Param('id') id: string): Promise<AccountEntity> {
     return this.accountService.getAccountByIdClient(id);
   }
 
-  @Put(':id')
+  // @Put(':id')
   updateAccountByIdClient(
     @Param('id') id: string,
     @Body() updateAccount: AccountUpdateDto,
@@ -24,6 +26,7 @@ export class AccountController {
   }
 
   @Get('full/:id')
+  @ApiBearerAuth('access-token')
   getFullAccount(@Param('id') id: string) {
     return this.accountService.getFullAccount(id);
   }

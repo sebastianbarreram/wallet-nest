@@ -12,12 +12,26 @@ import { ClientCreateDto } from '../../../common/storage/dtos/client-create.dto'
 import { ClientEntity } from '../../../common/storage/postgres/entities/client.entity';
 import { ClientGetDto } from '../../../common/storage/dtos/client-get.dto';
 import { AuthGuard } from '../../../common/guards/auth-guard';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOperation,
+  ApiTags,
+  ApiUnprocessableEntityResponse,
+} from '@nestjs/swagger';
 
 @Controller('api/client')
+@ApiTags('Client')
 export class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
   @Post('signup')
+  @ApiOperation({
+    summary: 'Create client',
+    description: 'This endpoint is used to store a client.',
+  })
+  @ApiCreatedResponse({ description: 'Created Succesfully' })
+  @ApiUnprocessableEntityResponse({ description: 'Bad Request' })
   signup(
     @Body(
       new ValidationPipe({
@@ -33,6 +47,7 @@ export class ClientController {
 
   @Get('search/:search')
   @UseGuards(AuthGuard)
+  @ApiBearerAuth('access-token')
   getClientBySearch(@Param('search') search: string): Promise<ClientGetDto> {
     return this.clientService.getClientBySearch(search);
   }
