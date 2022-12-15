@@ -67,7 +67,7 @@ export class MovementCreateDto implements MovementInterface {
   @IsDate({
     message: 'The `date` argument must be of type Date',
   })
-  @ApiPropertyOptional({
+  @ApiProperty({
     example: '2022-12-14 11:00:01.650000',
     description:
       'The exact time the money was moved from one account to another.',
