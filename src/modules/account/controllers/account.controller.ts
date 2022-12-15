@@ -23,18 +23,6 @@ export class AccountController {
     return this.accountService.updateAccount(id, updateAccount);
   }
 
-  @Get('images/:id')
-  getMovementPhotosByAccountId(
-    @Param('id') id: string,
-  ): Promise<AccountGetByIDInterface[]> {
-    return this.accountService.getMovementPhotosByAccountId(id);
-  }
-
-  @Get('movements/:id')
-  getMovementsByAccountId(@Param('id') id: string) {
-    return this.accountService.getMovementsByAccountId(id);
-  }
-
   @Get('full/:id')
   getFullAccount(@Param('id') id: string) {
     return this.accountService.getFullAccount(id);

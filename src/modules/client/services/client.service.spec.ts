@@ -208,6 +208,7 @@ describe('ClientService', () => {
     //Assert
     expect(result).resolves.toEqual(expected);
   });
+
   it('should fetch a specific client by its phone number', () => {
     //Arrange
     const phone = '3';

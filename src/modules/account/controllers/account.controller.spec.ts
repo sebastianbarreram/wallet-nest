@@ -86,6 +86,53 @@ describe('AccountController', () => {
                   });
                 },
               ),
+            getFullAccount: jest.fn().mockImplementation((id: string) => {
+              return Promise.resolve({
+                id: '4930c3e9-1c49-45a4-8439-b2d574c106e5',
+                idClient: '09feaa0a-3783-49f4-809b-3fbfe89e511b',
+                balance: '10000000',
+                credit: '50000000',
+                state: 1,
+                createdAt: '2022-12-14T23:35:23.942Z',
+                updatedAt: '2022-12-14T18:39:26.110Z',
+                deletedAt: null,
+                movementsIncome: [
+                  {
+                    id: '69f895ed-7d5d-4e5e-8757-3bcd9cf15a16',
+                    idIncome: '4930c3e9-1c49-45a4-8439-b2d574c106e5',
+                    idOutcome: '27acf227-382d-406f-841a-824f68739103',
+                    reason: 'Pay loan',
+                    amount: '10000000',
+                    fees: 1,
+                    date: '2022-12-14T23:39:27.102Z',
+                  },
+                ],
+                movementsOutcome: [],
+                movements: [
+                  {
+                    id: '69f895ed-7d5d-4e5e-8757-3bcd9cf15a16',
+                    idIncome: '4930c3e9-1c49-45a4-8439-b2d574c106e5',
+                    idOutcome: '27acf227-382d-406f-841a-824f68739103',
+                    reason: 'Pay loan',
+                    amount: '10000000',
+                    fees: 1,
+                    date: '2022-12-14T23:39:27.102Z',
+                  },
+                ],
+                images: [
+                  {
+                    id: '4930c3e9-1c49-45a4-8439-b2d574c106e5',
+                    photo:
+                      'https://s.gravatar.com/avatar/d10ca8d11301c2f4993ac2279ce4b930?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fa.png',
+                  },
+                  {
+                    id: '27acf227-382d-406f-841a-824f68739103',
+                    photo:
+                      'https://lh3.googleusercontent.com/a/AEdFTp7PlxTCtt1xTk24oxFRQj9j8nVLojac1Y_g3MYEOw=s96-c',
+                  },
+                ],
+              });
+            }),
           },
         },
       ],
@@ -197,5 +244,61 @@ describe('AccountController', () => {
     //Assert
     expect(result).resolves.toEqual(expected);
     expect(service.updateAccount).toHaveBeenCalled();
+  });
+
+  it('should fetch a specific account with all information by its idAccount', () => {
+    //Arrange
+    const idClient = 'f03c4464-2aea-4330-a9fb-eda42fb5c724';
+
+    const expected = {
+      id: '4930c3e9-1c49-45a4-8439-b2d574c106e5',
+      idClient: '09feaa0a-3783-49f4-809b-3fbfe89e511b',
+      balance: '10000000',
+      credit: '50000000',
+      state: 1,
+      createdAt: '2022-12-14T23:35:23.942Z',
+      updatedAt: '2022-12-14T18:39:26.110Z',
+      deletedAt: null,
+      movementsIncome: [
+        {
+          id: '69f895ed-7d5d-4e5e-8757-3bcd9cf15a16',
+          idIncome: '4930c3e9-1c49-45a4-8439-b2d574c106e5',
+          idOutcome: '27acf227-382d-406f-841a-824f68739103',
+          reason: 'Pay loan',
+          amount: '10000000',
+          fees: 1,
+          date: '2022-12-14T23:39:27.102Z',
+        },
+      ],
+      movementsOutcome: [],
+      movements: [
+        {
+          id: '69f895ed-7d5d-4e5e-8757-3bcd9cf15a16',
+          idIncome: '4930c3e9-1c49-45a4-8439-b2d574c106e5',
+          idOutcome: '27acf227-382d-406f-841a-824f68739103',
+          reason: 'Pay loan',
+          amount: '10000000',
+          fees: 1,
+          date: '2022-12-14T23:39:27.102Z',
+        },
+      ],
+      images: [
+        {
+          id: '4930c3e9-1c49-45a4-8439-b2d574c106e5',
+          photo:
+            'https://s.gravatar.com/avatar/d10ca8d11301c2f4993ac2279ce4b930?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fa.png',
+        },
+        {
+          id: '27acf227-382d-406f-841a-824f68739103',
+          photo:
+            'https://lh3.googleusercontent.com/a/AEdFTp7PlxTCtt1xTk24oxFRQj9j8nVLojac1Y_g3MYEOw=s96-c',
+        },
+      ],
+    };
+    //Act
+    const result = controller.getFullAccount(idClient);
+    //Assert
+    expect(result).resolves.toEqual(expected);
+    expect(service.getFullAccount).toHaveBeenCalled();
   });
 });
